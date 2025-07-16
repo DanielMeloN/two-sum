@@ -1,0 +1,22 @@
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivo = arr[0]
+    menores = [x for x in arr[1:] if x[0] <= pivo[0]]
+    maiores = [x for x in arr[1:] if x[0] > pivo[0]]
+    return quick_sort(menores) + [pivo] + quick_sort(maiores)
+
+def two_sum_sorted(nums, target):
+    nums_indexed = [(num, idx) for idx, num in enumerate(nums)]
+    nums_sorted = quick_sort(nums_indexed)
+
+    i, j = 0, len(nums_sorted) - 1
+
+    while i < j:
+        soma = nums_sorted[i][0] + nums_sorted[j][0]
+        if soma == target:
+            return [nums_sorted[i][1], nums_sorted[j][1]]
+        elif soma < target:
+            i += 1
+        else:
+            j -= 1
